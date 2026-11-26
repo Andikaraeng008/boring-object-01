@@ -1,16 +1,18 @@
 """Write the one-line review of the most boring everyday object.
 
 Run from the repo root:  python3 main.py
-Writes the review (132 characters) plus one trailing newline to
-output/entry.txt, byte-identically on every run.
+Writes the review (119 characters) plus one trailing newline to
+$MAKEFUN_OUTPUT_DIR/entry.txt, byte-identically on every run.
 """
 
+import os
 import pathlib
 
-LINE = "The wire coat hanger: it holds your best suit, tangles with six of its brothers in the dark, and somehow ended up owning the closet."
+LINE = "The lift music in this building has played the same four notes since 2009; even the buttons press themselves to escape."
 
 def main():
-    out = pathlib.Path(__file__).resolve().parent / "output" / "entry.txt"
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    out = pathlib.Path(out_dir) / "entry.txt"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(LINE + "\n", encoding="utf-8")
 
